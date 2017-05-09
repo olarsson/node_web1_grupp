@@ -1,0 +1,45 @@
+Sida: Landningssidan
+------------------
+
+Ej inloggad:
+ - Logga in
+ - Skapa konto
+
+Inloggad:
+ - Bilar
+ - Bokningar
+
+Sida: Skapa konto
+------------------
+ - Formulär med följande fält
+   • Förnamn
+   • Efternamn
+   • Användarnamn
+   • Lösenord
+
+ - Efter skapande av konto, skicka användare till sida "Logga in"
+
+
+Sida: Logga in
+------------------
+ - Formulär med följande fält
+   • Användarnamn
+   • Lösenord
+     • Vid success: skicka användare till sida "Bilar"
+
+
+Sida: Bilar
+------------------
+ - Lista med tillgängliga bilar + dina bokningar
+   • Kunna sortera listan i (frontenden? borde vara enklast.)
+   • Avboka en egen tidigare bokning (endast en knapp)
+   • Boka en ledig bil (knapp + 2 datumkontroller för datum)
+     • Vid success: Visa dina uppgifter och bilens uppgifter
+
+
+Sida: Editera/Lägg till Bilar
+------------------
+ - Lista med alla bilar
+ - Kunna ändra egenskaperna via t.ex. dropdowns och input-fält direkt i DOM:en med <form> och ajax
+
+
