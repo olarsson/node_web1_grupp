@@ -1,0 +1,39 @@
+.form_table form {
+  margin: 0;
+}
+
+.form_table input,select,button {
+  height: 2em;
+  min-width: 6em;
+  width: 100%;
+}
+
+.form_table th {
+  text-align: left;
+}
+
+
+
+
+.divTable{
+	display: table;
+	width: 100%;
+}
+.divTableRow {
+	display: table-row;
+}
+.divTableHeading {
+	display: table-header-group;
+}
+.divTableCell, .divTableHead {
+	display: table-cell;
+	padding: 3px;
+  width: 6em;
+}
+.divTableHeading {
+	display: table-header-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
+}

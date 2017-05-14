@@ -8,10 +8,12 @@ var form_methods = {
 
 (function() {
 
-  $('form[data-edit="true"] input[type="submit"]').on('click', function() {
-    var method = this.value;
+  $(document).on("click", "form[data-edit='true'] input[type='submit']", function () {
+
+    var method = $(this).attr('data-meth');
     var form = $(this).closest('form')[0];
 
+    //console.log(form)
     $.ajax({
 
       url: '/cars',
