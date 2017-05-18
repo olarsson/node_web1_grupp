@@ -1,0 +1,91 @@
+Förtydliganden
+"Sida" är namnet på sidan man är på.
+"URL" är den exakta adressen dit man navigerat när man är på sidan.
+"Nuvarande URL" var sidan hittas nu, ska ändras till ovstående "URL".
+"Länkar" är vart den nuvarande sidan ska länka till på frontend-delen, sett från användarnas vy.
+
+------------------
+
+Sida: Admin
+URL: /admin
+Nuvarande URL: /cars
+Länkar: -
+
+Två olika tables.
+
+Table 1:
+Formulär där man lägger in en ny bil.
+
+Table 2:
+Alla bilarna i databasen visas med sina respektive egenskaper.
+
+Kan utökas till att även visa vem som har bokat respektive bil om vi har tid över i slutet.
+
+------------------
+
+Sida: Landningssidan
+URL: /
+Nuvarande URL: /login eller /signup beroende om man är inloggad eller ej.
+Länkar: /signup
+
+Formulär där man loggar in.
+
+ Fält
+  • användarnamn
+  • lösenord
+
+
+------------------
+
+Sida: Sign up
+Nuvarande URL: /signup
+URL: /signup
+Länkar: /login
+
+Formulär där man signar upp.
+
+ Fält
+  • förnamn
+  • efternamn
+  • användarnamn
+  • lösenord
+  • lösenord igen
+
+------------------
+
+Sida: Min sida
+URL: /min-sida
+Nuvarande URL: -
+Länkar: /logga ut
+
+Listar alla bilar i ett table (se mall car_admin.ejs).
+Varje bil/rad i tablet är ett eget formulär (<form></form>), således kan vi enkelt koppla flera olika knappar så som boka/avboka till varje rad/bil.
+Dom som är bokade av andra användare rödmarkeras.
+Dom som är bokade av den nuvarande användaren grönmarkeras.
+Dom som är obokade behöver ingen markering.
+
+ Bokningstablets fält för varje bil:
+  • märke
+  • automat
+  • takräcke
+  • pris [ej ändringsbart]
+  • boka från datum [date box]
+  • boka till datum [date box]
+  • boka [knapp - endast enabled om bilen är obokad]
+  • avboka [knapp - endast enabled om bilen är bokad av användaren]
+
+Förslag på hantering av bokning mellan två datum
+ - Ett formulär med 2 st datum-boxes och en knapp "Visa". När man trycker på "Visa" skickas en request till vårt eget API via ajax och därefter laddas tablet om och visar dom tillgängliga bilarna mellan dessa datum.
+
+Förslag på hantering av avbokning
+ - I tablet finns en knapp för "Avboka" för varje rad/bil. Vi klick sker en request via ajax till vårt eget API som tar bort avbokningen och rensar bort den raden/bilen.
+
+Förslag på händelse vid klick på "Boka" knapp
+ - En overlay visas där man ser sin egen info (namn etc) och bilens info. Där kan man välja att bekräfta eller avbryta.
+
+Förslag på händelse vid klick på "Avboka" knapp
+ - En overlay visas där man får antingen bekräfta eller avbryta sin avbokning.
+
+Förslag på hantering av sortering på egenskaper av bil
+ - Förslag 1: Sorterings-ikon vid varje egenskap i tablet, vid klick skickas en ajax request till vårt API som sorterar resultat på det valda fältet.
+ - Förslag 2: Göra det på frontenden med ett third-party plugin. Kan nog vara rätt bökigt att skriva sin egen sorterings-modul.
