@@ -7,5 +7,6 @@ const router = express.Router();
 router.use('/',       require('./home'));
 router.use('/user',   require('./user'));
 router.use('/cars',   require('./car_admin'));
+router.use('/min-sida',   require('./booking'));
 
 module.exports = router
