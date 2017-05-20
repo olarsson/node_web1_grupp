@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const Cars = require('../models/car_admin');
+const User = require('../models/user');
 
 //Root route, if user is logged in goto index else the signup page
 router.get('/', (req, res) => {
@@ -30,7 +31,19 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/min-sida', (req, res) => {
-  res.render('min-sida.ejs');
+  //res.render('min-sida.ejs');
+  if (!req.session.user) {
+    res.redirect('/signup');
+  }
+
+  var u_id = req.session.user._id;
+  Cars.find(function(err, coll) {
+    res.render('min-sida.ejs', {
+      allcars: coll,
+      user_id: u_id
+    });
+  });
+
 });
 
 module.exports = router
