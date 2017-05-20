@@ -29,4 +29,8 @@ router.get('/login', (req, res) => {
   res.render('login.ejs');
 });
 
+router.get('/min-sida', (req, res) => {
+  res.render('min-sida.ejs');
+});
+
 module.exports = router
