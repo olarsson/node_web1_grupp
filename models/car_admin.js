@@ -6,7 +6,7 @@ const CarsBackend = mongoose.Schema({
     automat: { type: Boolean, required: true },
     rail: { type: Boolean, required: true },
     price: { type: Number, required: true },
-    booked: { type: Boolean, required: true }
+    booked: { type: String }
 });
 
 module.exports = mongoose.model('Cars', CarsBackend);

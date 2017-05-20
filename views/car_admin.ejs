@@ -11,7 +11,6 @@
         <div class="divTableHead">Automat</div>
         <div class="divTableHead">Takräcke</div>
         <div class="divTableHead">Pris</div>
-        <div class="divTableHead">Bokad</div>
       </div>
       <div class="divTableRow">
         <form action="/cars" method="post">
@@ -38,12 +37,12 @@
           <div class="divTableCell">
             <input type="text" name="price" placeholder="price"><br>
           </div>
-          <div class="divTableCell">
+        <!--  <div class="divTableCell">
             <select name="booked">
               <option value="true">Ja</option>
               <option value="false" selected>Nej</option>
             </select>
-          </div>
+          </div>-->
           <div class="divTableCell">
             <input type="submit" value="Submit">
           </div>
@@ -97,10 +96,7 @@
               <input type="text" name="price" placeholder="price" value="<%= allcars[i].price %>"><br>
             </div>
             <div class="divTableCell">
-              <select name="booked">
-                <option value="true">Ja</option>
-                <option value="false" <% if (allcars[i].booked == false) { %> selected <% } %>>Nej</option>
-              </select>
+              <% if (!allcars[i].booked) { %> Nej <% } else { %>Av id : <%= allcars[i].booked %>  <% } %>
             </div>
             <div class="divTableCell">
               <input type="submit" value="Ändra" data-meth="PATCH">
@@ -115,7 +111,7 @@
         <% } %>
       </div>
     </div>
-    
+
   </div>
 
   <script src="/js/jquery-3.1.1.min.js" type="text/javascript"></script>

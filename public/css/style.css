@@ -12,6 +12,14 @@
   text-align: left;
 }
 
+form.green {
+  background: rgba(81, 189, 81, 0.26); /* green */
+}
+
+form.red {
+  background: rgba(255, 0, 0, 0.16); /* red */
+}
+
 
 
 

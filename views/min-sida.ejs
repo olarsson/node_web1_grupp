@@ -26,10 +26,25 @@
       <div class="divTableHead">Avboka</div>
     </div>
 
-    <% for (var i = 0; i < allcars.length; i++) { %>
+    <% for (var i = 0; i < allcars.length; i++) {
+
+      var car_booked = 0;  //0 = ingen bokning, 1 = av någon annan, 2 = av användaren
+      var car_class = '';
+
+      if (allcars[i].booked) {
+        if (user_id == allcars[i].booked) {
+          car_booked = 2;
+          car_class = 'green';
+        } else {
+          car_booked = 1;
+          car_class = 'red';
+        }
+      }
+
+      %>
 
       <div class="divTableRow">
-        <form data-edit="true" action="/min-sida" method="post">
+        <form data-edit="true" action="/min-sida" method="post" class="<%= car_class %>">
           <input type="hidden" name="_method" value="delete">
           <input type="hidden" name="car_id" value="<%= allcars[i]._id %>">
           <input type="hidden" name="user_id" value="<%= user_id %>">
@@ -56,21 +71,31 @@
             <span><%= allcars[i].price %></span>
           </div>
           <div class="divTableCell">
-            <span>
-              <% if (allcars[i].booked == false) { %>Nej<% } else { %>Ja<% } %>
+            <span name="booked">
+              <%
+              if (car_booked === 0) {
+                %>Ledig<%
+              } else if (car_booked === 1) {
+                %>Upptagen<%
+              } else if (car_booked === 2) {
+                %>Ja<%
+              }
+              %>
             </span>
           </div>
           <div class="divTableCell">
-            <input type="date" name="date_from" value="2017-01-23">
+            <input type="date" name="date_from" value="2017-01-23" <% if (car_booked !== 0) { %>disabled<% } %>>
           </div>
           <div class="divTableCell">
-            <input type="date" name="date_to" value="2017-02-15">
+            <input type="date" name="date_to" value="2017-02-15" <% if (car_booked !== 0) { %>disabled<% } %>>
           </div>
           <div class="divTableCell">
-            <input type="submit" value="Boka" data-meth="POST">
+
+            <input type="submit" value="Boka" data-meth="POST" <% if (car_booked !== 0) { %>disabled<% } %>>
+
           </div>
           <div class="divTableCell">
-            <input type="submit" value="Avboka" data-meth="DELETE">
+            <input type="submit" value="Avboka" data-meth="DELETE" <% if (car_booked !== 2) { %>disabled<% } %> >
           </div>
 
         </form>
