@@ -1,5 +1,84 @@
-<form action="/min-sida" method="post">
-  <input type="date" name="book_from">
-  <input type="date" name="book_to">
-  <input type="submit">
-</form>
+<link rel="stylesheet" href="/css/style.css">
+
+
+<!--<form action="/min-sida" method="post">
+<input type="date" name="book_from">
+<input type="date" name="book_to">
+<input type="submit">
+</form>-->
+
+
+
+
+<h2>Bilar</h2>
+
+<div class="divTable">
+  <div class="divTableBody">
+    <div class="divTableHeading">
+      <div class="divTableHead">Märke</div>
+      <div class="divTableHead">Automat</div>
+      <div class="divTableHead">Takräcke</div>
+      <div class="divTableHead">Pris</div>
+      <div class="divTableHead">Bokad</div>
+      <div class="divTableHead">Boka från</div>
+      <div class="divTableHead">Boka till</div>
+      <div class="divTableHead">Boka</div>
+      <div class="divTableHead">Avboka</div>
+    </div>
+
+    <% for (var i = 0; i < allcars.length; i++) { %>
+
+      <div class="divTableRow">
+        <form data-edit="true" action="/min-sida" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="car_id" value="<%= allcars[i]._id %>">
+          <input type="hidden" name="user_id" value="<%= user_id %>">
+
+          <div class="divTableCell">
+            <span>
+              <% if (allcars[i].typ == 'volvo') { %>Volvo<% } %>
+              <% if (allcars[i].typ == 'saab') { %>Saab<% } %>
+              <% if (allcars[i].typ == 'mercedes') { %>Mercedes<% } %>
+              <% if (allcars[i].typ == 'audi') { %>Audi<% } %>
+            </span>
+          </div>
+          <div class="divTableCell">
+            <span>
+              <% if (allcars[i].automat == false) { %>Nej<% } else { %>Ja<% } %>
+            </span>
+          </div>
+          <div class="divTableCell">
+            <span>
+              <% if (allcars[i].rail == false) { %>Nej<% } else { %>Ja<% } %>
+            </span>
+          </div>
+          <div class="divTableCell">
+            <span><%= allcars[i].price %></span>
+          </div>
+          <div class="divTableCell">
+            <span>
+              <% if (allcars[i].booked == false) { %>Nej<% } else { %>Ja<% } %>
+            </span>
+          </div>
+          <div class="divTableCell">
+            <input type="date" name="date_from" value="2017-01-23">
+          </div>
+          <div class="divTableCell">
+            <input type="date" name="date_to" value="2017-02-15">
+          </div>
+          <div class="divTableCell">
+            <input type="submit" value="Boka" data-meth="POST">
+          </div>
+          <div class="divTableCell">
+            <input type="submit" value="Avboka" data-meth="DELETE">
+          </div>
+
+        </form>
+      </div>
+
+      <% } %>
+    </div>
+  </div>
+
+  <script src="/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+  <script src="/js/main.js" type="text/javascript"></script>

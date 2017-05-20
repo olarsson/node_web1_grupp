@@ -12,11 +12,11 @@ var form_methods = {
 
     var method = $(this).attr('data-meth');
     var form = $(this).closest('form')[0];
+    var url = $(form).attr('action');
 
-    //console.log(form)
     $.ajax({
 
-      url: '/cars',
+      url: url,
       data: form_methods.objectifyForm(form),
       type: method,
       cache: true,
@@ -27,11 +27,26 @@ var form_methods = {
         data = jqXHR.responseJSON;
 
         if (textStatus == 'success') {
-          if (method == 'DELETE') {
-            $(form).remove();
-          } else {
-            console.log('update success');
+
+          //admin delen av post/delete/patch
+          if (url == '/cars') {
+            if (method == 'DELETE') {
+              $(form).remove();
+            } else {
+              console.log('update success');
+            }
           }
+
+          //bokningsdelen av post/delete
+          if (url == '/min-sida') {
+            if (method == 'DELETE') {
+              console.log('bil avbokad')
+            } else {
+              console.log('bil bokad')
+            }
+          }
+
+
         } else {
           //request failed, timed out, etc..
 
