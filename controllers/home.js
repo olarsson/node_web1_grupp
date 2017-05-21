@@ -16,9 +16,25 @@ router.get('/', (req, res) => {
 
 //Route for editing/adding/removing cars from the db
 router.get('/admin', (req, res) => {
-  Cars.find(function(err, coll) {
-    res.render('car_admin.ejs', {allcars: coll});
-  });
+
+  Cars.aggregate(
+    [
+      {$lookup: {
+        from: "users",
+        localField: "booked",
+        foreignField: "_id",
+        as: "res_doc"}
+      }
+    ],
+    function(err,result) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render('car_admin.ejs', {allcars: result});
+      }
+    }
+  );
+
 });
 
 //Route for signup page

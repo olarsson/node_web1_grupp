@@ -96,7 +96,7 @@
               <input type="text" name="price" placeholder="price" value="<%= allcars[i].price %>"><br>
             </div>
             <div class="divTableCell">
-              <% if (!allcars[i].booked) { %> Nej <% } else { %>Av id : <%= allcars[i].booked %>  <% } %>
+              <% if (!allcars[i].booked) { %> Nej <% } else { %>Av: <%= allcars[i].res_doc[0].username %>  <% } %>
             </div>
             <div class="divTableCell">
               <input type="submit" value="Ändra" data-meth="PATCH">
