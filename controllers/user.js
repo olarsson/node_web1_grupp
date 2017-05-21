@@ -17,8 +17,8 @@ router.post('/', (req, res) => {
 });
 
 //Get user, returns user info as json
-router.get('/:id', (req, res) => {
-    User.findById(req.params.id, (error, user) => {
+router.get('/:username', (req, res) => {
+    User.findOne({ 'username': req.params.username }, (error, user) => {
         if (error) res.json({ message: error })
         else {
             res.json(user);
@@ -47,7 +47,7 @@ router.post('/login', (req, res) => {
 });
 
 //Handles user logout
-router.get('/logout', (req,res) => {
+router.get('/logout', (req, res) => {
     req.session.destroy((error) => {
         if (error) console.log(error)
         else res.redirect('/login')
