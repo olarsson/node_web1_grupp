@@ -13,7 +13,7 @@
         <div class="divTableHead">Pris</div>
       </div>
       <div class="divTableRow">
-        <form action="/cars" method="post">
+        <form action="/admin" method="post">
           <div class="divTableCell">
             <select name="typ">
               <option value="volvo">Volvo</option>
@@ -68,7 +68,7 @@
       <% for (var i = 0; i < allcars.length; i++) { %>
 
         <div class="divTableRow">
-          <form data-edit="true" action="/cars" method="post">
+          <form data-edit="true" action="/admin" method="post">
             <input type="hidden" name="_method" value="delete">
             <input type="hidden" name="id" value="<%= allcars[i]._id %>">
 
@@ -96,7 +96,7 @@
               <input type="text" name="price" placeholder="price" value="<%= allcars[i].price %>"><br>
             </div>
             <div class="divTableCell">
-              <% if (!allcars[i].booked) { %> Nej <% } else { %>Av id : <%= allcars[i].booked %>  <% } %>
+              <% if (!allcars[i].booked) { %> Nej <% } else { %>Av: <%= allcars[i].res_doc[0].username %>  <% } %>
             </div>
             <div class="divTableCell">
               <input type="submit" value="Ändra" data-meth="PATCH">

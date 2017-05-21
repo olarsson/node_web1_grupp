@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
   cars.save(error => {
     if (error) res.json({ message: error })
     else {
-      res.redirect('/cars');
+      res.redirect('/admin');
     }
   });
 

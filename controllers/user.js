@@ -28,7 +28,7 @@ router.get('/:username', (req, res) => {
 
 //Handles user login
 router.post('/login', (req, res) => {
-    User.findOne({ 'firstname': req.body.username }, (error, user) => {
+    User.findOne({ 'username': req.body.username }, (error, user) => {
         if (error) console.log(error)
         else if (user) {
             user.checkPassword(req.body.password, (error, match) => {
@@ -50,7 +50,7 @@ router.post('/login', (req, res) => {
 router.get('/logout', (req, res) => {
     req.session.destroy((error) => {
         if (error) console.log(error)
-        else res.redirect('/login')
+        else res.redirect('/')
     })
 });
 
