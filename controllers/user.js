@@ -16,6 +16,16 @@ router.post('/', (req, res) => {
     });
 });
 
+//Get user, returns user info as json
+router.get('/:id', (req, res) => {
+    User.findById(req.params.id, (error, user) => {
+        if (error) res.json({ message: error })
+        else {
+            res.json(user);
+        }
+    });
+});
+
 //Handles user login
 router.post('/login', (req, res) => {
     User.findOne({ 'firstname': req.body.username }, (error, user) => {
