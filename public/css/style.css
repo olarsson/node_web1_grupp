@@ -103,7 +103,7 @@ form.red {
     height: 95%;
 }
 
-.login-form input {
+.form-container input {
     padding: 2%;
     width: 100%;
     height: 15%;
@@ -111,13 +111,54 @@ form.red {
     font-size: 20em;
 }
 
-.login-form input:focus {
+.form-container input:focus {
     height: 20%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     outline: none;
 }
 
-.login-form input[type="submit"] {
+.form-container input[type="submit"] {
     height: 35%;
     background: springgreen;
+}
+
+.signup-form {
+    background: #aaa;
+    flex-basis: 500px;
+    padding: 15px;
+    height: 50%;
+    max-height: 275px;
+}
+
+.signup-form form {
+    font-size: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-content: space-between;
+    height: 95%;
+}
+
+.signup-form input {
+    padding: 2%;
+    width: 100%;
+    height: 10%;
+    border: none;
+    font-size: 20em;
+}
+
+.signup-form input:focus {
+    height: 12%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    outline: none;
+}
+
+.signup-form input[type="submit"] {
+    height: 20%;
+    background: springgreen;
+}
+
+.signup-form p {
+    margin: 2% 0;
 }
