@@ -9,19 +9,36 @@ router.post('/', (req, res) => {
   var carid = req.body.car_id;
   var userid = req.body.user_id;
 
-  booking.save(error => {
-    if (error) res.json({ message: error })
-    else {
-      Cars.findOneAndUpdate({ _id: carid }, {$set:{
-        booked: userid
-      }}, error => {
-        if (error) res.json({ message: error })
-        else {
-          res.redirect('/min-sida');
-        }
+  //if (req.body.book_from) {
+    //Filtrera på datum
+
+    //console.log('-------- FILTRERA PÅ DATUM --------');
+
+    /*var u_id = req.session.user._id;
+    Cars.find(function(err, coll) {
+      res.render('min-sida.ejs', {
+        allcars: coll,
+        user_id: u_id
       });
-    }
-  });
+    });*/
+
+  //} else {
+    //Ny bokning
+    booking.save(error => {
+      if (error) res.json({ message: error })
+      else {
+        Cars.findOneAndUpdate({ _id: carid }, {$set:{
+          booked: userid
+        }}, error => {
+          if (error) res.json({ message: error })
+          else {
+            res.redirect('/min-sida');
+          }
+        });
+      }
+    });
+  //}
+
 
 });
 

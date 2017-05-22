@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
 
 //Handles user login
 router.post('/login', (req, res) => {
-    User.findOne({ 'firstname': req.body.username }, (error, user) => {
+    User.findOne({ 'username': req.body.username }, (error, user) => {
         if (error) console.log(error)
         else if (user) {
             user.checkPassword(req.body.password, (error, match) => {
@@ -37,11 +37,21 @@ router.post('/login', (req, res) => {
 });
 
 //Handles user logout
-router.get('/logout', (req,res) => {
+router.get('/logout', (req, res) => {
     req.session.destroy((error) => {
-        if (error) console.log(error)
-        else res.redirect('/login')
+        if (error) console.log('error')
+        else res.redirect('/')
     })
+});
+
+//Get user, returns user info as json
+router.get('/:username', (req, res) => {
+    User.findOne({ 'username': req.params.username }, 'username', (error, user) => {
+        if (error) res.json({ message: error })
+        else {
+            res.json(user);
+        }
+    });
 });
 
 module.exports = router
