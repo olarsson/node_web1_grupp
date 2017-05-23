@@ -162,3 +162,9 @@ form.red {
 .signup-form p {
     margin: 2% 0;
 }
+
+.flash {
+    text-align: center;
+    color: white;
+    background: darkred;
+}

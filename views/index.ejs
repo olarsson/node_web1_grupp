@@ -1,18 +1,20 @@
 <%- include header.ejs %>
     <% if (flash.info) { %>
-        <p><%= flash.info %></p>
-    <% } %>
-    <div class="form-container">
-        <div class="login-form">
-            <form action="/user/login" method="post" name="login">
-                <input type="text" name="username" placeholder="Username">
-                <input type="password" name="password" placeholder="Password">
-                <input type="submit" value="Login">
-            </form>
+        <p class="flash">
+            <%= flash.info %>
+        </p>
+        <% } %>
+            <div class="form-container">
+                <div class="login-form">
+                    <form action="/user/login" method="post" name="login">
+                        <input type="text" name="username" placeholder="Username">
+                        <input type="password" name="password" placeholder="Password">
+                        <input type="submit" value="Login">
+                    </form>
 
-            <a href="/signup">Skapa konto</a>
-        </div>
-    </div>
+                    <a href="/signup">Skapa konto</a>
+                </div>
+            </div>
 
 
-    <%- include footer.ejs %>
+            <%- include footer.ejs %>

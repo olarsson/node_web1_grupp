@@ -12,7 +12,7 @@ describe('Users', () => {
 
     let api = null;
 
-beforeEach(() => api = session(app));
+    beforeEach(() => api = session(app));
 
     // Remove User that gets created during testing
     after(() => {
@@ -32,20 +32,20 @@ beforeEach(() => api = session(app));
             })
             .expect(302)
             .end((err, res) => {
-                if (err) console.log(err)
+                if (err) done(err)
                 else {
                     res.header.location.should.equal('/');
                     done();
                 }
             })
-    });
+    }).timeout(10000); // longer timeout for slow mlab connection
 
     it('should return the requested user', done => {
         api.get(`/user/${username}`)
             .expect(200)
             .end((err, res) => {
                 if (err) {
-                    console.log(err);
+                    done(err);
                 } else {
                     res.body.should.have.property('_id');
                     res.body._id.should.not.equal(null);
@@ -63,8 +63,11 @@ beforeEach(() => api = session(app));
             })
             .expect(302)
             .end((err, res) => {
-                res.header.location.should.equal('/');
-                done();
+                if (err) done(err)
+                else {
+                    res.header.location.should.equal('/');
+                    done();
+                }
             });
     });
 
@@ -75,12 +78,18 @@ beforeEach(() => api = session(app));
                 'username': randomstring.generate(),
                 'password': '12345'
             })
-            .expect()
             .end((err, res) => {
-                console.log(api)
-                res.body.should.have.property('message');
-                res.body.message.should.equal('username or password where incorrect');
-                done();
+                if (err) done(err)
+                else {
+                    api.get('/')
+                        .end((err, res) => {
+                            if (err) done(err)
+                            else {
+                                res.text.should.include('incorrect');
+                                done();
+                            }
+                        });
+                }
             });
     });
 
@@ -92,9 +101,17 @@ beforeEach(() => api = session(app));
                 'password': 'WrongPassword'
             })
             .end((err, res) => {
-                res.body.should.have.property('message');
-                res.body.message.should.equal('username or password where incorrect');
-                done();
+                if (err) done(err);
+                else {
+                    api.get('/')
+                        .end((err, res) => {
+                            if (err) done(err)
+                            else {
+                                res.text.should.include('incorrect');
+                                done();
+                            }
+                        });
+                }
             });
     });
 
