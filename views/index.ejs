@@ -1,4 +1,7 @@
 <%- include header.ejs %>
+    <% if (flash.info) { %>
+        <p><%= flash.info %></p>
+    <% } %>
     <div class="form-container">
         <div class="login-form">
             <form action="/user/login" method="post" name="login">
@@ -10,5 +13,6 @@
             <a href="/signup">Skapa konto</a>
         </div>
     </div>
+
 
     <%- include footer.ejs %>

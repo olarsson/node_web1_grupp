@@ -27,11 +27,14 @@ router.post('/login', (req, res) => {
                     req.session.user = user;
                     res.redirect('/')
                 } else {
-                    res.json({ message: 'username or password where incorrect' });
+                    res.flash('info', 'username or password where incorrect' );
+                    res.render('index.ejs');
                 }
             });
         } else {
-            res.json({ message: 'username or password where incorrect' });
+            res.flash('info', 'username or password where incorrect' );
+            res.flash('info', 'username or password where incorrect' );
+            res.redirect('/');
         }
     });
 });
