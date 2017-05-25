@@ -1,13 +1,18 @@
 const should = require('chai').should();
-const supertest = require('supertest');
+// const supertest = require('supertest');
+const session = require('supertest-session');
 const app = require('../app');
-const api = supertest(app);
+// const api = supertest(app);
 const User = require('../models/user');
 const randomstring = require('randomstring');
 
 describe('Users', () => {
     //create "unique" username as to not conflict with existing username 
     const username = randomstring.generate();
+
+    let api = null;
+
+    beforeEach(() => api = session(app));
 
     // Remove User that gets created during testing
     after(() => {
@@ -27,20 +32,20 @@ describe('Users', () => {
             })
             .expect(302)
             .end((err, res) => {
-                if (err) console.log(err)
+                if (err) done(err)
                 else {
                     res.header.location.should.equal('/');
                     done();
                 }
             })
-    });
+    }).timeout(10000); // longer timeout for slow mlab connection
 
     it('should return the requested user', done => {
         api.get(`/user/${username}`)
             .expect(200)
             .end((err, res) => {
                 if (err) {
-                    console.log(err);
+                    done(err);
                 } else {
                     res.body.should.have.property('_id');
                     res.body._id.should.not.equal(null);
@@ -58,8 +63,11 @@ describe('Users', () => {
             })
             .expect(302)
             .end((err, res) => {
-                res.header.location.should.equal('/');
-                done();
+                if (err) done(err)
+                else {
+                    res.header.location.should.equal('/');
+                    done();
+                }
             });
     });
 
@@ -71,9 +79,17 @@ describe('Users', () => {
                 'password': '12345'
             })
             .end((err, res) => {
-                res.body.should.have.property('message');
-                res.body.message.should.equal('username or password where incorrect');
-                done();
+                if (err) done(err)
+                else {
+                    api.get('/')
+                        .end((err, res) => {
+                            if (err) done(err)
+                            else {
+                                res.text.should.include('incorrect');
+                                done();
+                            }
+                        });
+                }
             });
     });
 
@@ -85,9 +101,17 @@ describe('Users', () => {
                 'password': 'WrongPassword'
             })
             .end((err, res) => {
-                res.body.should.have.property('message');
-                res.body.message.should.equal('username or password where incorrect');
-                done();
+                if (err) done(err);
+                else {
+                    api.get('/')
+                        .end((err, res) => {
+                            if (err) done(err)
+                            else {
+                                res.text.should.include('incorrect');
+                                done();
+                            }
+                        });
+                }
             });
     });
 

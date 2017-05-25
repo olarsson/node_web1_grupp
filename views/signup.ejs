@@ -1,12 +1,16 @@
 <%- include header.ejs %>
 
-<form action="/user" method="post">
-    <input type="text" name="username" placeholder="Username"><br>
-    <input type="password" name="password" placeholder="Password"><br>
-    <input type="text" name="firstname" placeholder="First name"><br>
-    <input type="text" name="lastname" placeholder="Last name"><br>
-    <input type="submit" value="Signup">
-</form>
-<p>Already have an account? Please <a href="/">Login</a></p>
+<div class="form-container">
+    <div class="signup-form">
+        <form action="/user" method="post">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="text" name="firstname" placeholder="First name">
+            <input type="text" name="lastname" placeholder="Last name">
+            <input type="submit" value="Signup">
+        </form>
+        <p>Already have an account? Please <a href="/">Login</a></p>
+    </div>
+</div>
 
 <%- include footer.ejs %>
