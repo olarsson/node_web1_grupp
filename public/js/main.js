@@ -146,13 +146,12 @@ var tableSort = {
       timeout: 10000,
 
       complete: function (jqXHR, textStatus) {
-
         data = jqXHR.responseJSON;
 
         if (textStatus == 'success') {
 
           //admin delen av post/delete/patch
-          if (url == '/admin') {
+          if (~url.indexOf('/cars')) {
             if (method == 'DELETE') {
               $(form).remove();
             } else {
