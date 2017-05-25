@@ -1,28 +1,30 @@
 {
-  "name": "yhjust16-car-rental",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^1.0.2",
-    "body-parser": "^1.17.1",
-    "ejs": "^2.5.6",
-    "express": "^4.15.2",
-    "express-session": "^1.15.2",
-    "mongoose": "^4.9.8"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.4.1",
-    "randomstring": "^1.1.5",
-    "supertest": "^3.0.0"
-  }
+    "name": "yhjust16-car-rental",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^1.0.2",
+        "body-parser": "^1.17.1",
+        "ejs": "^2.5.6",
+        "express": "^4.15.2",
+        "express-flash-2": "^1.0.1",
+        "express-session": "^1.15.2",
+        "mongoose": "^4.9.8"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "mocha": "^3.4.1",
+        "randomstring": "^1.1.5",
+        "supertest": "^3.0.0",
+        "supertest-session": "^3.0.0"
+    }
 }
