@@ -1,14 +1,5 @@
-<%- include header.ejs %>
+<h2>Mina bokningar</h2>
 
-<%- include mina_bokningar.ejs %>
-
-
-<div class="confirm">
-  <p></p>
-  <input type="submit" value="Bekräfta bokning">
-</div>
-
-<h2>Bilar</h2>
 
 <div class="divTable">
   <div class="divTableBody">
@@ -18,11 +9,11 @@
       <div class="divTableHead">Takräcke</div>
       <div class="divTableHead">Pris</div>
       <div class="divTableHead">Bokad</div>
-      <div class="divTableHead">Boka från</div>
-      <div class="divTableHead">Boka till</div>
-      <div class="divTableHead">Boka</div>
+      <div class="divTableHead divTableHeadDate">Boka från</div>
+      <div class="divTableHead divTableHeadDate">Boka till</div>
       <div class="divTableHead">Avboka</div>
     </div>
+
 
     <% for (var i = 0; i < allcars.length; i++) {
 
@@ -31,21 +22,14 @@
 
       if (allcars[i].booked) {
         if (user_id == allcars[i].booked) {
-          car_booked = 2;
-          car_class = 'green';
-        } else {
-          car_booked = 1;
-          car_class = 'red';
-        }
-      }
-
+          car_booked = 2;        
       %>
 
       <div class="divTableRow">
-        <form data-edit="true" action="/min-sida" method="post" class="<%= car_class %>">
+        <form data-edit="true" action="/min-sida" method="post">
           <input type="hidden" name="_method" value="delete">
           <input type="hidden" name="car_id" value="<%= allcars[i]._id %>">
-          <input type="hidden" name="user_id" value="<%= user_id %>">
+          <input type="hidden" name="user_id" value="<%= user_id %>">     
 
           <div class="divTableCell">
             <span>
@@ -82,30 +66,31 @@
             </span>
           </div>
           <div class="divTableCell">
-            <input type="date" name="date_from" value="2017-01-23" <% if (car_booked !== 0) { %>disabled<% } %>>
+            <input type="date" name="date_from" <% if (car_booked !== 0) { %>disabled<% } %>>
           </div>
           <div class="divTableCell">
-            <input type="date" name="date_to" value="2017-02-15" <% if (car_booked !== 0) { %>disabled<% } %>>
-          </div>
-          <div class="divTableCell">
-
-            <input type="submit" value="Boka" data-meth="POST" <% if (car_booked !== 0) { %>disabled<% } %>>
-
+            <input type="date" name="date_to" <% if (car_booked !== 0) { %>disabled<% } %>>
           </div>
           <div class="divTableCell">
             <input type="submit" value="Avboka" data-meth="DELETE" <% if (car_booked !== 2) { %>disabled<% } %> >
           </div>
 
         </form>
+
+<% for (var j = 0; j < userbooking.length; j++) { 
+  if (userbooking[j].car_id.$oid == allcars[i]._id.$oid){
+             %>
+      <p><%= userbooking[j].date_from %></p>
+     
+    <% } 
+  } %>
+
       </div>
 
-      <% } %>
+      <%    
+          } 
+        }
+      } 
+      %>
     </div>
   </div>
-
-  <a href="/user/logout">Logout</a>
-
-  <script src="/js/jquery-3.1.1.min.js" type="text/javascript"></script>
-  <script src="/js/main.js" type="text/javascript"></script>
-
-  <%- include footer.ejs %>
