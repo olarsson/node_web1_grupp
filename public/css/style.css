@@ -1,170 +1,279 @@
 html,
 body {
-    height: 100%;
+  height: 100%;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+html, body, input, textarea, select, button {
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  color: #5fabbd;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(170, 207, 216, 0.52);
+  transition: border 0.5s;
+}
+
+a:hover {
+  border-color: #5fabbd;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.cars,
+.form_table {
+  margin: 0 auto;
+  margin-top: 100px;
+  /* width: 100%; */
+  display: inline-block;
+  text-align: left;
+}
+
+.cars input[type="submit"]:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.cars input[type="date"]:disabled {
+  background: transparent;
+}
+
+.cars input[type="submit"],
+.form_table input[type="submit"] {
+  cursor: pointer;
+  background: #aacfd8;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: white;
+  border: 0;
+  outline: none;
 }
 
 .form_table form {
-    margin: 0;
+  margin: 0;
 }
 
 .form_table input,
 select,
 button {
-    height: 2em;
-    min-width: 6em;
-    width: 100%;
+  height: 30px;
+  min-width: 6em;
+  width: 100%;
+}
+
+.cars input,.cars select,.cars button,
+.form_table input, .form_table select, .form_table button {
+  height: 30px;
+  min-width: 6em;
+  width: 100%;
+  /* padding: 20px; */
+  border: 0;
+  /*border-top: 1px solid #aacfd8;*/
+  /* background: #f4f6f7; */
+  /* margin: 0; */
+  /* display: inline; */
 }
 
 .form_table th {
-    text-align: left;
+  text-align: left;
 }
 
 form.green {
-    background: rgba(81, 189, 81, 0.26);
-    /* green */
+  background: linear-gradient(rgba(121, 255, 121, 0.32), rgba(93, 175, 114, 0.45));
+  /*background: rgba(81, 189, 81, 0.26);*/
+  /* green */
 }
 
 form.red {
-    background: rgba(255, 0, 0, 0.16);
-    /* red */
+  background: linear-gradient(rgba(255, 121, 121, 0.34), rgba(216, 87, 87, 0.11));
+  /*background: rgba(255, 0, 0, 0.16);*/
+  /* red */
 }
 
 .confirm {
-    display: none;
+  display: none;
 }
 
 .confirm.active {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .divTable {
-    display: table;
-    width: 100%;
+  display: table;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .divTableRow {
-    display: table-row;
+  display: table-row;
+  font-size: 13px;
+}
+
+.divTableHead {
+  font-size: 14px;
 }
 
 .divTableHeading {
-    display: table-header-group;
+  display: table-header-group;
+}
+
+.divTableCell {
+  border-top: 1px solid #e0e0e0;
+}
+
+.divTableCell input[type="date"] {
+  padding-left: 0;
+  padding-right: 0;
+  width: 130px;
+}
+
+
+.cars .divTableCell:nth-of-type(6),.cars .divTableCell:nth-of-type(7),
+.cars .divTableHead:nth-of-type(6),.cars .divTableHead:nth-of-type(7) {
+  width: 130px;
 }
 
 .divTableCell,
 .divTableHead {
-    display: table-cell;
-    padding: 3px;
-    width: 6em;
+  display: table-cell;
+  padding: 3px;
+  width: 90px;
 }
 
 .divTableHeading {
-    display: table-header-group;
-    font-weight: bold;
+  display: table-header-group;
+  font-weight: bold;
 }
 
 .divTableBody {
-    display: table-row-group;
+  display: table-row-group;
 }
 
 .form-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .login-form {
-    background: #aaa;
-    flex-basis: 500px;
-    padding: 15px;
-    height: 30%;
-    max-height: 170px;
+  flex-basis: 500px;
+  padding: 15px;
+  height: 30%;
+  max-height: 170px;
 }
 
 .login-form form {
-    font-size: 5%;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    align-content: space-between;
-    height: 95%;
+  margin-bottom: 20px;
+  font-size: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-content: space-between;
+  height: 95%;
+  transition: box-shadow 0.5s;
 }
 
 .form-container input {
-    padding: 2%;
-    width: 100%;
-    height: 15%;
-    border: none;
-    font-size: 20em;
+  padding: 2%;
+  width: 100%;
+  height: 15%;
+  border: none;
+  font-size: 20em;
+  transition: box-shadow 0.5s;
+  border: 1px solid #aacfd8;
 }
 
+.form-container input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0px 9999px white;
+}
+
+.form-container input:hover,
 .form-container input:focus {
-    height: 20%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    outline: none;
+  transition: box-shadow 0.5s;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0), 0 6px 6px rgba(0, 0, 0, 0.09);
+  outline: none;
 }
 
 .form-container input[type="submit"] {
-    height: 35%;
-    background: springgreen;
+  height: 35%;
+  background: #aacfd8;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
 }
 
 .signup-form {
-    background: #aaa;
-    flex-basis: 500px;
-    padding: 15px;
-    height: 50%;
-    max-height: 275px;
+  /*background: #aaa;*/
+  flex-basis: 500px;
+  padding: 15px;
+  height: 50%;
+  max-height: 275px;
 }
 
 .signup-form form {
-    font-size: 5%;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    align-content: space-between;
-    height: 95%;
+  font-size: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-content: space-between;
+  height: 95%;
+  margin-bottom: 20px;
 }
 
 .signup-form input {
-    padding: 2%;
-    width: 100%;
-    height: 10%;
-    border: none;
-    font-size: 20em;
+  padding: 2%;
+  width: 100%;
+  height: 10%;
+  border: none;
+  font-size: 20em;
+  transition: box-shadow 0.5s;
+  border: 1px solid #aacfd8;
 }
 
 .signup-form input:focus {
-    height: 12%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    outline: none;
+  height: 12%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  outline: none;
 }
 
 .signup-form input[type="submit"] {
-    height: 20%;
-    background: springgreen;
+  height: 20%;
+  background: #aacfd8;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
 }
 
 .signup-form p {
-    margin: 2% 0;
+  margin: 2% 0;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
 }
 
 .flash {
-    text-align: center;
-    color: white;
-    background: darkred;
+  text-align: center;
+  color: white;
+  background: darkred;
 }
