@@ -8,7 +8,7 @@ const User = require('../models/user')
 router.post('/', (req, res) => {
     var user = new User(req.body);
     user.save(error => {
-        if (error) res.json({ message: error })
+        if (error) res.flash(error)
         else {
             req.session.user = user
             res.redirect('/');
@@ -22,16 +22,18 @@ router.post('/login', (req, res) => {
         if (error) console.log(error)
         else if (user) {
             user.checkPassword(req.body.password, (error, match) => {
-                if (error) console.log(error)
+                if (error) res.flash(error)
                 if (match) {
                     req.session.user = user;
                     res.redirect('/')
                 } else {
-                    res.json({ message: 'username or password where incorrect' });
+                    res.flash('info', 'username or password where incorrect');
+                    res.render('index.ejs');
                 }
             });
         } else {
-            res.json({ message: 'username or password where incorrect' });
+            res.flash('info', 'username or password where incorrect');
+            res.redirect('/');
         }
     });
 });
@@ -39,7 +41,7 @@ router.post('/login', (req, res) => {
 //Handles user logout
 router.get('/logout', (req, res) => {
     req.session.destroy((error) => {
-        if (error) console.log('error')
+        if (error) res.flash(error)
         else res.redirect('/')
     })
 });
@@ -47,7 +49,7 @@ router.get('/logout', (req, res) => {
 //Get user, returns user info as json
 router.get('/:username', (req, res) => {
     User.findOne({ 'username': req.params.username }, 'username', (error, user) => {
-        if (error) res.json({ message: error })
+        if (error) res.flash(error)
         else {
             res.json(user);
         }
