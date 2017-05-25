@@ -55,7 +55,14 @@ var tableSort = {
     }
     const rows = $('.divTableBody').children().slice(1); // Slice to remove table header from selection
     let sortedRows = rows.sort((a, b) => {
-      return $(a).children().children()[index].innerText > $(b).children().children()[index].innerText;
+      if ($(a).find('input').length > 0) {
+        a = $($(a).children().children()[index]).find('input')[0].value;
+        b = $($(b).children().children()[index]).find('input')[0].value;
+      } else {
+        a = $(a).children().children()[index].innerText;
+        b = $(b).children().children()[index].innerText;
+      }
+      return a > b;
     });
     sortedRows.appendTo('.divTableBody');
   },
@@ -63,7 +70,14 @@ var tableSort = {
     el.innerText = el.innerText.replace('\u2193', '\u2191');
     const rows = $('.divTableBody').children().slice(1); // Slice to remove table header from selection
     let sortedRows = rows.sort((a, b) => {
-      return $(a).children().children()[index].innerText < $(b).children().children()[index].innerText;
+      if ($(a).find('input').length > 0) {
+        a = $($(a).children().children()[index]).find('input')[0].value;
+        b = $($(b).children().children()[index]).find('input')[0].value;
+      } else {
+        a = $(a).children().children()[index].innerText;
+        b = $(b).children().children()[index].innerText;
+      }
+      return a < b;
     });
     sortedRows.appendTo('.divTableBody');
 
