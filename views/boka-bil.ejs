@@ -47,14 +47,10 @@
         %>
 
         <div class="divTableRow">
-          <form data-edit="true" action="/min-sida" method="post" class="<%= car_class %>">
+          <form data-edit="true" action="/boka-bil" method="post" class="<%= car_class %>">
             <input type="hidden" name="_method" value="delete">
             <input type="hidden" name="car_id" value="<%= allcars[i]._id %>">
             <input type="hidden" name="user_id" value="<%= user_id %>">
-            <input type="hidden" name="typ" value="<%= allcars[i].typ %>">
-            <input type="hidden" name="automat" value="<%= allcars[i].automat %>">
-            <input type="hidden" name="rail" value="<%= allcars[i].rail %>">
-            <input type="hidden" name="price" value="<%= allcars[i].price %>">
 
             <div class="divTableCell">
               <span>

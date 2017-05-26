@@ -19,9 +19,12 @@
 
       <% for (var i = 0; i < userbooking.length; i++) { 
 
+        
+
         var dateFrom = moment(userbooking[i].date_from).format('YYYY-MM-DD');
         var dateTo = moment(userbooking[i].date_to).format('YYYY-MM-DD');
 
+        if(userbooking[i].user_id == user_id) {
       %>
 
         <div class="divTableRow">
@@ -32,24 +35,24 @@
 
             <div class="divTableCell">
               <span>
-                <% if (userbooking[i].typ == 'volvo') { %>Volvo<% } %>
-                <% if (userbooking[i].typ == 'saab') { %>Saab<% } %>
-                <% if (userbooking[i].typ == 'mercedes') { %>Mercedes<% } %>
-                <% if (userbooking[i].typ == 'audi') { %>Audi<% } %>
+                <% if (userbooking[i].res_doc[0].typ == 'volvo') { %>Volvo<% } %>
+                <% if (userbooking[i].res_doc[0].typ == 'saab') { %>Saab<% } %>
+                <% if (userbooking[i].res_doc[0].typ == 'mercedes') { %>Mercedes<% } %>
+                <% if (userbooking[i].res_doc[0].typ == 'audi') { %>Audi<% } %>
               </span>
             </div>
             <div class="divTableCell">
               <span>
-                <% if (userbooking[i].automat == false) { %>Nej<% } else { %>Ja<% } %>
+                <% if (userbooking[i].res_doc[0].automat == false) { %>Nej<% } else { %>Ja<% } %>
               </span>
             </div>
             <div class="divTableCell">
               <span>
-                <% if (userbooking[i].rail == false) { %>Nej<% } else { %>Ja<% } %>
+                <% if (userbooking[i].res_doc[0].rail == false) { %>Nej<% } else { %>Ja<% } %>
               </span>
             </div>
             <div class="divTableCell">
-              <span><%= userbooking[i].price %></span>
+              <span><%= userbooking[i].res_doc[0].price %></span>
             </div>
             <div class="divTableCell">
               <span name="booked">
@@ -73,7 +76,7 @@
 
           </form>
         </div>       
-        <% } %>
+        <% }} %>
 
       </div>
 

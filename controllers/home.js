@@ -48,13 +48,27 @@ router.get('/min-sida', (req, res) => {
     res.redirect('/');
   } else {
     var u_id = req.session.user._id;
-    Booking.find({ user_id : u_id}, function(err, result){
+    Booking.aggregate([
+      {$lookup: {
+        from: "cars",
+        localField: "car_id",
+        foreignField: "_id",
+        as: "res_doc"}
+      }
+      ],
+      function(err, result){
+      if (err) {
+        console.log(err);
+      } else {
         res.render('min-sida.ejs', {
-        user_id: u_id,
-        userbooking: result
-        });
-      });
-  }
+          userbooking: result,
+          user_id: u_id
+            });
+          }
+        }
+
+      );
+    }
 });
 
 router.get('/boka-bil', (req, res) => {
