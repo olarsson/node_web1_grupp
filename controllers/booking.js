@@ -5,11 +5,11 @@ const Cars = require('../models/car_admin');
 
 //Ny bokning
 router.post('/', (req, res) => {
-  var booking = new Booking(req.body);
-  var carid = req.body.car_id;
-  var userid = req.body.user_id;
+    var booking = new Booking(req.body);
+    var carid = req.body.car_id;
+    var userid = req.body.user_id;
 
-  //if (req.body.book_from) {
+    //if (req.body.book_from) {
     //Filtrera på datum
 
     //console.log('-------- FILTRERA PÅ DATUM --------');
@@ -22,48 +22,55 @@ router.post('/', (req, res) => {
       });
     });*/
 
-  //} else {
+    //} else {
     //Ny bokning
     booking.save(error => {
-      if (error) res.json({ message: error })
-      else {
-        Cars.findOneAndUpdate({ _id: carid }, {$set:{
-          booked: userid
-        }}, error => {
-          if (error) res.json({ message: error })
-          else {
-            res.redirect('/min-sida');
-          }
-        });
-      }
+        if (error) res.json({ message: error })
+        else {
+            Cars.findOneAndUpdate({ _id: carid }, {
+                $set: {
+                    booked: userid
+                }
+            }, error => {
+                if (error) res.json({ message: error })
+                else {
+                    res.format({
+                        'json': () => res.json(booking),
+                        '*/*': () => res.redirect('/min-sida')
+                    })
+                }
+            });
+        }
     });
-  //}
+    //}
 
 
 });
 
 
 //Avboka en bil
-router.delete('/', (req, res) => {
+router.delete('/:car_id', (req, res) => {
 
-  var carid = req.body.car_id;
+    var carid = req.params.car_id;
 
-  Booking.remove({ car_id: carid }, error => {
-    if (error) res.json({ message: error })
-    else {
-
-      Cars.findOneAndUpdate({ _id: carid }, {$unset:{
-        booked: 1
-      }}, error => {
+    Booking.remove({ car_id: carid }, error => {
         if (error) res.json({ message: error })
         else {
-          res.json({ message: 'success' })
+
+            Cars.findOneAndUpdate({ _id: carid }, {
+                $unset: {
+                    booked: 1
+                }
+            }, error => {
+                if (error) res.json({ message: error })
+                else {
+                    res.json({ message: 'success' })
+                }
+            });
+
+
         }
-      });
-
-
-    }
-  });
+    });
 
 });
 

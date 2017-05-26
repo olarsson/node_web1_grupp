@@ -20,6 +20,7 @@ app.set('view engine', 'ejs');
 
 //Load and configure middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(session({ secret: 'jätte hemligt',
                   resave: true,
                   saveUninitialized: true }));
