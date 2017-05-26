@@ -10,25 +10,34 @@ router.post('/', (req, res) => {
   cars.save(error => {
     if (error) res.json({ message: error })
     else {
-      res.redirect('/admin');
+      res.format({
+        'json': () => res.json(cars),
+        '*/*': () => res.redirect('/admin')
+      });
     }
   });
-
 });
 
+
+//Gets a car
+router.get('/:id', (req, res) => {
+  Cars.findById(req.params.id, (err, data) => {
+    if (err) res.json(err)
+    else res.json(data)
+  });
+})
+
 //Delete a car
-router.delete('/', (req, res) => {
-  Cars.remove({ _id: req.body.id }, error => {
+router.delete('/:id', (req, res) => {
+  Cars.remove({ _id: req.params.id }, error => {
     if (error) res.json({ message: error })
-    else {
-      res.json({ message: 'success' })
-    }
+    else res.json({ message: 'success' })    
   });
 });
 
 //Update a car
-router.patch('/', (req, res) => {
-  Cars.findOneAndUpdate({ _id: req.body.id }, {$set:{
+router.patch('/:id', (req, res) => {
+  Cars.findOneAndUpdate({ _id: req.params.id }, {$set:{
     typ: req.body.typ,
     automat: req.body.automat,
     rail: req.body.rail,
@@ -37,7 +46,13 @@ router.patch('/', (req, res) => {
   }}, error => {
     if (error) res.json({ message: error })
     else {
-      res.json({ message: 'success' })
+      res.format({
+        'json': () => Cars.findById(req.params.id, (err, data) => {
+          if (err) res.json(err)
+          else res.json(data)
+        }),
+        'default': () => res.json({ message: 'success' })
+      });
     }
   });
 });

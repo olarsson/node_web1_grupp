@@ -22,7 +22,7 @@ describe('Users', () => {
     });
 
     it('should create user and reroute to /', done => {
-        api.post('/user/')
+        api.post('/users/')
             .type('form')
             .send({
                 username: username,
@@ -41,7 +41,7 @@ describe('Users', () => {
     }).timeout(10000); // longer timeout for slow mlab connection
 
     it('should return the requested user', done => {
-        api.get(`/user/${username}`)
+        api.get(`/users/${username}`)
             .expect(200)
             .end((err, res) => {
                 if (err) {
@@ -55,7 +55,7 @@ describe('Users', () => {
     });
 
     it('should login a user and reroute to /', done => {
-        api.post('/user/login')
+        api.post('/users/login')
             .type('form')
             .send({
                 'username': username,
@@ -72,7 +72,7 @@ describe('Users', () => {
     });
 
     it('should not login if username does not exist', done => {
-        api.post('/user/login')
+        api.post('/users/login')
             .type('form')
             .send({
                 'username': randomstring.generate(),
@@ -94,7 +94,7 @@ describe('Users', () => {
     });
 
     it('should not login if password is incorrect', done => {
-        api.post('/user/login')
+        api.post('/users/login')
             .type('form')
             .send({
                 'username': username,
@@ -116,7 +116,7 @@ describe('Users', () => {
     });
 
     it('should logout a user and reroute to /', done => {
-        api.get('/user/logout')
+        api.get('/users/logout')
             .expect(302)
             .end((err, res) => {
                 if (err) console.log(err)
