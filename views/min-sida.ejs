@@ -1,5 +1,4 @@
 <%- include header.ejs %>
-
     <!--<h2>Visa lediga bilar mellan datum</h2>
 <form id="bookings_from_to" action="/min-sida" method="post">
 <input type="date" name="book_from" value="2017-01-20">
@@ -32,20 +31,13 @@
 
                 <% for (var i = 0; i < allcars.length; i++) {
 
-        var car_booked = 0;  //0 = ingen bokning, 1 = av någon annan, 2 = av användaren
-        var car_class = '';
+        
 
-        if (allcars[i].booked) {
-          if (user_id == allcars[i].booked) {
-            car_booked = 2;
-            car_class = 'green';
-          } else {
-            car_booked = 1;
-            car_class = 'red';
-          }
-        }
+        var dateFrom = moment(userbooking[i].date_from).format('YYYY-MM-DD');
+        var dateTo = moment(userbooking[i].date_to).format('YYYY-MM-DD');
 
-        %>
+        if(userbooking[i].user_id == user_id) {
+      %>
 
                     <div class="divTableRow">
                         <form data-edit="true" action="/bookings/<%= allcars[i]._id %>" method="post" class="<%= car_class %>">
@@ -85,6 +77,7 @@
                   %>Ja<%
                 }
                 %>
+
               </span>
                             </div>
                             <div class="divTableCell">
@@ -111,6 +104,7 @@
 
                     <% } %>
             </div>
+
         </div>
 
         <a href="/user/logout">Logout</a>

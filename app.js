@@ -4,6 +4,7 @@ const express = require('express');
 const session = require('express-session');
 const flash = require('express-flash-2');
 const bodyParser = require('body-parser');
+const moment = require('moment');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -26,6 +27,7 @@ app.use(session({ secret: 'jätte hemligt',
                   saveUninitialized: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(flash());
+app.locals.moment = moment;
 
 //Loads controller
 app.use(require('./controllers'));

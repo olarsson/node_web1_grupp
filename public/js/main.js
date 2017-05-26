@@ -89,7 +89,8 @@ var tableSort = {
 (function() {
     tableSort.registerEventListener($('.divTableHeading'));
 
-    /*  $(document).on("click", "#bookings_from_to input[type='submit']", function () {
+
+  /*  $(document).on("click", "#bookings_from_to input[type='submit']", function () {
   
         $.ajax({
   
@@ -159,6 +160,29 @@ var tableSort = {
                         }
                     }
 
+          //bokningsdelen av post/delete
+          /*
+          if (url == '/min-sida') {
+            if (method == 'DELETE') {
+              form_methods.booked_by(false, form);
+              console.log('bil avbokad')
+              $(form).remove();
+            } else {
+              console.log('bil bokad')
+              form_methods.booked_by(true, form);
+            }
+          }
+
+          if (url == '/boka-bil') {
+            if (method == 'DELETE') {
+              form_methods.booked_by(false, form);
+              console.log('bil avbokad')
+            } else {
+              console.log('bil bokad')
+              form_methods.booked_by(true, form);
+            }
+          }
+          */
                     //bokningsdelen av post/delete
                     if (~url.indexOf('/bookings')) {
                         if (method == 'DELETE') {

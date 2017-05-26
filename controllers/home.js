@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const Cars = require('../models/car_admin');
 const User = require('../models/user');
+const Booking = require('../models/booking');
 
 //Root route, if user is logged in goto min-sida else the login page
 router.get('/', (req, res) => {
@@ -47,13 +48,43 @@ router.get('/min-sida', (req, res) => {
     res.redirect('/');
   } else {
     var u_id = req.session.user._id;
-    Cars.find(function(err, coll) {
-      res.render('min-sida.ejs', {
+    Booking.aggregate([
+      {$lookup: {
+        from: "cars",
+        localField: "car_id",
+        foreignField: "_id",
+        as: "res_doc"}
+      }
+      ],
+      function(err, result){
+      if (err) {
+        console.log(err);
+      } else {
+        res.render('min-sida.ejs', {
+          userbooking: result,
+          user_id: u_id
+            });
+          }
+        }
+
+      );
+    }
+});
+
+router.get('/boka-bil', (req, res) => {
+  if (!req.session.user) {
+    res.redirect('/');
+  } else {
+    var u_id = req.session.user._id;
+    Cars.find(function(err, coll) {      
+        res.render('boka-bil.ejs', {
         allcars: coll,
-        user_id: u_id
+        user_id: u_id,      
       });
-    });
+    });  
   }
 });
+
+
 
 module.exports = router
