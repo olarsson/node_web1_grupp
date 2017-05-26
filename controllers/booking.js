@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
                 else {
                     res.format({
                         'json': () => res.json(booking),
-                        '*/*': () => res.redirect('/min-sida')
+                        '*/*': () => res.redirect('/boka-bil')
                     })
                 }
             });

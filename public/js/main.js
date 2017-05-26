@@ -89,36 +89,34 @@ var tableSort = {
 (function() {
     tableSort.registerEventListener($('.divTableHeading'));
 
-
-  /*  $(document).on("click", "#bookings_from_to input[type='submit']", function () {
+    /*  $(document).on("click", "#bookings_from_to input[type='submit']", function () {
   
-        $.ajax({
+          $.ajax({
   
-          url: url,
-          data: form_methods.objectifyForm(form),
-          type: method,
-          cache: true,
-          timeout: 10000,
+            url: url,
+            data: form_methods.objectifyForm(form),
+            type: method,
+            cache: true,
+            timeout: 10000,
   
-          complete: function (jqXHR, textStatus) {
+            complete: function (jqXHR, textStatus) {
   
-            data = jqXHR.responseJSON;
+              data = jqXHR.responseJSON;
   
-            if (textStatus == 'success') {
+              if (textStatus == 'success') {
   
+  
+              }
   
             }
   
-          }
+  
+          });
   
   
-        });
-  
-  
-      });*/
+        });*/
 
     $(document).on("click", "form[data-edit='true'] input[type='submit']", function() {
-
         var method = $(this).attr('data-meth');
         var form = $(this).closest('form')[0];
         var url = $(this).attr('data-url') || $(form).attr('action');
@@ -160,34 +158,12 @@ var tableSort = {
                         }
                     }
 
-          //bokningsdelen av post/delete
-          /*
-          if (url == '/min-sida') {
-            if (method == 'DELETE') {
-              form_methods.booked_by(false, form);
-              console.log('bil avbokad')
-              $(form).remove();
-            } else {
-              console.log('bil bokad')
-              form_methods.booked_by(true, form);
-            }
-          }
-
-          if (url == '/boka-bil') {
-            if (method == 'DELETE') {
-              form_methods.booked_by(false, form);
-              console.log('bil avbokad')
-            } else {
-              console.log('bil bokad')
-              form_methods.booked_by(true, form);
-            }
-          }
-          */
                     //bokningsdelen av post/delete
                     if (~url.indexOf('/bookings')) {
                         if (method == 'DELETE') {
                             form_methods.booked_by(false, form);
                             console.log('bil avbokad')
+                            window.location.reload(true);
                         } else {
                             console.log('bil bokad')
                             form_methods.booked_by(true, form);
