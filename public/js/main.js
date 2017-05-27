@@ -34,7 +34,7 @@ var tableSort = {
     index = null;
     for (let i = 0; i < elList.length; i++) {
       if (elList[i] == e.target) {
-        index = i + 3; //there is 3 input elements first that we ignore
+        index = i + 4; //there is 3 input elements first that we ignore
         break;
       };
     }
