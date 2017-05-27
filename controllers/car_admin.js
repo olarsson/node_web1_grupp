@@ -41,7 +41,8 @@ router.patch('/:id', (req, res) => {
     typ: req.body.typ,
     automat: req.body.automat,
     rail: req.body.rail,
-    price: req.body.price
+    price: req.body.price,
+    seats: req.body.seats
   }}, error => {
     if (error) res.json({ message: error })
     else {

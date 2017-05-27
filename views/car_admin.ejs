@@ -1,5 +1,10 @@
 <link rel="stylesheet" href="/css/style.css">
 
+<div class="confirm">
+  <p></p>
+  <input type="submit" value="Stäng">
+</div>
+
 <div class="form_table">
 
   <h2>Ny bil</h2>
@@ -45,7 +50,7 @@
             </select>
           </div>
           <div class="divTableCell">
-            <input type="text" name="price" placeholder="price"><br>
+            <input type="number" name="price" placeholder="price"><br>
           </div>
           <div class="divTableCell">
             <input type="submit" value="Submit">
@@ -70,8 +75,6 @@
       </div>
 
       <% for (var i = 0; i < allcars.length; i++) {
-
-console.info(allcars[i])
 
         %>
 

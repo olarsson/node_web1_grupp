@@ -28,4 +28,3 @@ DB Variable	Typ av info	Beskrivning
  - password:	string		desc: användarens lösenord
  - firstname:	string		desc: användarens förnamn
  - lastname:	string		desc: användarens efternamn
- 

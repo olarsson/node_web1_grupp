@@ -137,8 +137,9 @@ var tableSort = {
             if (~url.indexOf('/cars')) {
               if (method == 'DELETE') {
                 $(form).remove();
+                form_methods.booked_by('Bil borttagen', true, false);
               } else {
-                console.log('update success');
+                form_methods.booked_by('Bil ändrad', true, true);
               }
             }
 

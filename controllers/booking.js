@@ -48,9 +48,7 @@ router.post('/', (req, res) => {
               booked: mongoose.Types.ObjectId(booking._id)
               //"booked": new ObjectId(bookingid)
             }
-
           }, error => {
-            console.info(error)
             if (error) res.json({ message: error })
             else {
               res.format({
