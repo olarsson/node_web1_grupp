@@ -148,7 +148,11 @@ var tableSort = {
               if (method == 'DELETE') {
                 form_methods.booked_by('Bil avbokad', true, true);
               } else {
-                form_methods.booked_by('Bil bokad', true, false);
+                if (data) {
+                  form_methods.booked_by(data.message, true, false);
+                } else {
+                  form_methods.booked_by('Bil bokad', true, false);
+                }
               }
             }
 
