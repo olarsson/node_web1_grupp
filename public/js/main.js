@@ -49,7 +49,7 @@ var tableSort = {
       el.innerText = el.innerText.replace('\u2191', '\u2193');
     } else {
       $(el).parent().children().each((_, e) => {
-        e.innerText = e.innerText.replace('\u2193', '').replace('^', ''); // remove all arrows
+        e.innerText = e.innerText.replace('\u2193', '').replace('\u2191', ''); // remove all arrows
       });
       el.innerText = el.innerText + '\u2193';
     }
@@ -61,8 +61,11 @@ var tableSort = {
       } else {
         a = $(a).children().children()[index].innerText;
         b = $(b).children().children()[index].innerText;
+        a = isNaN(parseInt(a)) ? a : parseInt(a);
+        b = isNaN(parseInt(b)) ? b : parseInt(b);
       }
-      return a > b;
+      if (a > b) return 1
+      return (a < b) ? -1 : 0
     });
     sortedRows.appendTo('.divTableBody');
   },
@@ -76,8 +79,11 @@ var tableSort = {
       } else {
         a = $(a).children().children()[index].innerText;
         b = $(b).children().children()[index].innerText;
+        a = isNaN(parseInt(a)) ? a : parseInt(a);
+        b = isNaN(parseInt(b)) ? b : parseInt(b);
       }
-      return a < b;
+      if (a < b) return 1
+      return (a > b) ? -1 : 0
     });
     sortedRows.appendTo('.divTableBody');
 
