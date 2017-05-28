@@ -12,7 +12,7 @@ describe('Cars', () => {
     // Remove created car incase delete test fail.
     after(() => {
         Cars.remove({ _id: carId }, (err, result) => {
-            if (err) console.log('seese')
+            if (err) console.log(err)
         })
     })
 
@@ -23,6 +23,7 @@ describe('Cars', () => {
                 automat: true,
                 rail: false,
                 price: 2000,
+                seats: 4
             })
             .end((err, res) => {
                 if (err) console.log(err);
@@ -46,12 +47,14 @@ describe('Cars', () => {
     it('should update a car and return the updated version', done => {
         api.patch(`/cars/${carId}`)
             .send({
-                price: 3000
+                price: 3000,
+                seats: 5
             })
             .end((err, res) => {
                 if (err) console.log(err);
                 else {
                     res.body.price.should.equal(3000);
+                    res.body.seats.should.equal(5);
                     done();
                 }
             })

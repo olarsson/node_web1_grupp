@@ -17,7 +17,8 @@ describe('Bookings', () => {
             username: randomstring.generate(),
             password: randomstring.generate(),
             firstname: 'Test',
-            lastname: 'User'
+            lastname: 'User',
+            email: 'test@test.nu'
         });
         user.save((err) => {
             if (err) console.log(err);
@@ -26,7 +27,8 @@ describe('Bookings', () => {
             typ: 'volvo',
             automat: true,
             rail: true,
-            price: 1000
+            price: 1000,
+            seats: 4
         });
         car.save((err) => {
             if (err) console.log(err);
@@ -42,7 +44,7 @@ describe('Bookings', () => {
         });
     });
 
-    it('should book a car and return the booking and add user to car', done => {
+    it('should book a car and return the booking and add booking to car', done => {
         api.post('/bookings')
             .send({
                 car_id: car._id,
@@ -58,14 +60,13 @@ describe('Bookings', () => {
                     Cars.findById(car._id, (err, data) => {
                         if (err) done(err)
                         else {
-                            user._id.toString().should.equal(data.booked.toString());
+                            data.booked.should.include(bookingId);
                             done();
                         }
                     })
                 }
             })
-    });
-    
+    })
     it('should delete the booking and return success', done => {
         api.delete(`/bookings/${bookingId}`)
             .end((err, res) => {

@@ -28,7 +28,8 @@ describe('Users', () => {
                 username: username,
                 password: '12345',
                 firstname: 'Testy',
-                lastname: 'Test'
+                lastname: 'Test',
+                email: 'test@test.nu'
             })
             .expect(302)
             .end((err, res) => {

@@ -17,28 +17,18 @@ router.post('/', (req, res) => {
 
   //sök i dbn efter matches med query_date mellan date_from till date_to
   Booking.aggregate([
-
-    {
-      $lookup:
-      {
-        from: "cars",
-        localField: "car_id",
-        foreignField: "_id",
-        as: "res"
-      }
-    },
-    {
-      $match: { "car_id": mongoose.Types.ObjectId(carid) }
-    }
-
+    { "$match": { "car_id": mongoose.Types.ObjectId(carid) }},
+    { "$match": { "date_from": { "$lte": bookto }}},
+    { "$match": { "date_to": { "$gte": bookfrom }}},
   ],
 
   function(err, result) {
     if (err) {
       console.log(err);
+    } else if (result.length > 0) {
+      res.json({ message: 'Denna bil är inte ledig mellan angivna datum'})
     } else {
-
-      //Ny bokning
+    // Ny bokning
       booking.save(error => {
         if (error) res.json({ message: error })
         else {
@@ -101,5 +91,12 @@ router.delete('/:car_id', (req, res) => {
 
 });
 
+// Hämta alla bokningar
+router.get('/', (req, res) => {
+  bookings = Booking.find({}, (err, data) => {
+    if (err) res.json({ message: err });
+    else res.json(data);
+  });
+});
 
 module.exports = router;

@@ -34,7 +34,7 @@ var tableSort = {
     index = null;
     for (let i = 0; i < elList.length; i++) {
       if (elList[i] == e.target) {
-        index = i + 4; //there is 3 input elements first that we ignore
+        index = i + 3; //there is 3 input elements first that we ignore
         break;
       };
     }
@@ -148,7 +148,11 @@ var tableSort = {
               if (method == 'DELETE') {
                 form_methods.booked_by('Bil avbokad', true, true);
               } else {
-                form_methods.booked_by('Bil bokad', true, false);
+                if (data) {
+                  form_methods.booked_by(data.message, true, false);
+                } else {
+                  form_methods.booked_by('Bil bokad', true, false);
+                }
               }
             }
 
