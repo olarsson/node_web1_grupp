@@ -31,29 +31,25 @@ router.get('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   Cars.remove({ _id: req.params.id }, error => {
     if (error) res.json({ message: error })
-    else res.json({ message: 'success' })
+    else res.json({ message: 'success' })    
   });
 });
 
 //Update a car
 router.patch('/:id', (req, res) => {
-  Cars.findOneAndUpdate({ _id: req.params.id }, {$set:{
-    typ: req.body.typ,
-    automat: req.body.automat,
-    rail: req.body.rail,
-    price: req.body.price,
-    seats: req.body.seats
-  }}, error => {
-    if (error) res.json({ message: error })
-    else {
-      res.format({
-        'json': () => Cars.findById(req.params.id, (err, data) => {
-          if (err) res.json(err)
-          else res.json(data)
-        }),
-        'default': () => res.json({ message: 'success' })
-      });
-    }
+  Cars.findOneAndUpdate({ _id: req.params.id }, 
+    { $set: req.body },
+    error => {
+      if (error) res.json({ message: error })
+      else {
+        res.format({
+          'json': () => Cars.findById(req.params.id, (err, data) => {
+            if (err) res.json(err)
+            else res.json(data)
+          }),
+          'default': () => res.json({ message: 'success' })
+        });
+      }
   });
 });
 
