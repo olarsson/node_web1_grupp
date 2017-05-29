@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-//Schema for user model
+//Schema för bilarna
 const CarsBackend = mongoose.Schema({
     typ: { type: String, required: true },
     automat: { type: Boolean, required: true },

@@ -1,9 +1,11 @@
 var form_methods = {
+  //Gör om ett formulär till ett objekt
   objectifyForm: function(formArray) {
     var returnArray = {};
     for (var i = 0; i < formArray.length; i++) returnArray[formArray[i]['name']] = formArray[i]['value'];
     return returnArray;
   },
+  //Hantering av medelanden till klienten
   booked_by: function(msg, positive, reload_win) {
     $('.confirm').removeClass('red');
     $('.confirm').addClass('active');
@@ -14,9 +16,8 @@ var form_methods = {
 };
 
 var booking = {
-
   reload_win: false,
-
+  //Returnerar skillnaden i dagar mellan två datum
   date_diff_indays: function(date1, date2) {
     dt1 = new Date(date1);
     dt2 = new Date(date2);
@@ -24,6 +25,7 @@ var booking = {
   }
 };
 
+//Sortering av egenskaper i css-table under "min-sida" och "boka-bil"
 var tableSort = {
   registerEventListener: function(el) {
     el.on('click', function(e) {
@@ -93,7 +95,7 @@ var tableSort = {
 (function() {
   tableSort.registerEventListener($('.divTableHeading'));
 
-
+  //Event för stängning av medelandet som skickades till klienten
   $(document).on("click", ".confirm.active input[type='submit']", function() {
     if (booking.reload_win) {
       window.location.reload(true);
@@ -102,6 +104,7 @@ var tableSort = {
     }
   });
 
+  //Detta händer när man bokar/avbokar som användare. Eller ändrar/lägger till/tar bort en bil som admin
   $(document).on("click", "form[data-edit='true'] input[type='submit']", function() {
     var method = $(this).attr('data-meth');
     var form = $(this).closest('form')[0];
@@ -112,7 +115,7 @@ var tableSort = {
 
     var error_msg = null;
 
-    //ny bokning, kontrollera datum
+    //Ny bokning, kontrollera att datum är i "rätt ordning"
     if (~url.indexOf('/bookings') && method == 'POST') {
       if (booking.date_diff_indays( date_1, date_2 ) < 0) {
         error_msg = 'Datumen är i fel ordning.';
@@ -139,7 +142,7 @@ var tableSort = {
 
           if (textStatus == 'success') {
 
-            //admin delen av post/delete/patch
+            //Admin delen av post/delete/patch
             if (~url.indexOf('/cars')) {
               if (method == 'DELETE') {
                 $(form).remove();
@@ -149,7 +152,7 @@ var tableSort = {
               }
             }
 
-            //bokningsdelen av post/delete
+            //Bokningsdelen av post/delete
             if (~url.indexOf('/bookings')) {
               if (method == 'DELETE') {
                 form_methods.booked_by('Bil avbokad', true, true);
@@ -162,9 +165,6 @@ var tableSort = {
               }
             }
 
-
-          } else {
-            //request failed, timed out, etc..
 
           }
 

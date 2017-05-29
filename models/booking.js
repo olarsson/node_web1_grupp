@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
+//Schema för bokningarna
 const BookingSchema = mongoose.Schema({
   car_id : {type: ObjectId, required: true},
   user_id : {type: ObjectId, required: true},
