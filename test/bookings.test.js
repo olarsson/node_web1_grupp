@@ -12,6 +12,7 @@ describe('Bookings', () => {
     let bookingId = null;
     const api = session(app);
 
+    //Skapar användare och bil att använda i testerna
     before(() => {
         user = new Users({
             username: randomstring.generate(),
@@ -35,6 +36,7 @@ describe('Bookings', () => {
         });
     });
 
+    //Raderar användare och bil som skapades för test
     after(() => {
         user.remove((err) => {
             if (err) console.log(err);

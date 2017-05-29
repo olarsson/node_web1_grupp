@@ -1,10 +1,10 @@
-//User controlle handles routes for user functions
+//User controller hanterar users
 
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user')
 
-//Creates a new user and redirects to root
+//Skapar en ny användare och  reroutar till root
 router.post('/', (req, res) => {
     var user = new User(req.body);
     user.save(error => {
@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
     });
 });
 
-//Handles user login
+//Hanterar användar login
 router.post('/login', (req, res) => {
     User.findOne({ 'username': req.body.username }, (error, user) => {
         if (error) console.log(error)
@@ -38,7 +38,7 @@ router.post('/login', (req, res) => {
     });
 });
 
-//Handles user logout
+//Hanterar användar logout
 router.get('/logout', (req, res) => {
     req.session.destroy((error) => {
         if (error) res.flash(error)
@@ -46,7 +46,7 @@ router.get('/logout', (req, res) => {
     })
 });
 
-//Get user, returns user info as json
+//Hämtar användare, returnerar info som json
 router.get('/:username', (req, res) => {
     User.findOne({ 'username': req.params.username }, 'username', (error, user) => {
         if (error) res.flash(error)
