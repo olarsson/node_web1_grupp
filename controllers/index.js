@@ -1,9 +1,9 @@
-//Main controller loaded by app. Loads all other controllers
+//Huvud controller. Laddas av app.js. Laddar alla andra controllers
 
 const express = require('express');
 const router = express.Router();
 
-//Controllers to load
+//Controllers att ladda
 router.use('/', require('./home'));
 router.use('/users', require('./user'));
 router.use('/cars', require('./car_admin'));

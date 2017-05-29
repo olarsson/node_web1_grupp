@@ -7,14 +7,14 @@ const User = require('../models/user');
 const randomstring = require('randomstring');
 
 describe('Users', () => {
-    //create "unique" username as to not conflict with existing username 
+    //Skapar unikt användarnamn som inte ger konflikt med existerande användarnamn
     const username = randomstring.generate();
 
     let api = null;
 
     beforeEach(() => api = session(app));
 
-    // Remove User that gets created during testing
+    // Raderar användaren som skapas under testerna
     after(() => {
         User.remove({ 'username': username }, error => {
             if (error) console.log(error)
