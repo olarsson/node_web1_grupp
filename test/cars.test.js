@@ -9,7 +9,7 @@ describe('Cars', () => {
 
     beforeEach(() => api = session(app));
 
-    // Remove created car incase delete test fail.
+    // Raderar skapad bil om delete testet skulle mislyckas
     after(() => {
         Cars.remove({ _id: carId }, (err, result) => {
             if (err) console.log(err)
@@ -43,7 +43,7 @@ describe('Cars', () => {
                     done();
                 }
             })
-    })    
+    })
     it('should update a car and return the updated version', done => {
         api.patch(`/cars/${carId}`)
             .send({
@@ -68,4 +68,5 @@ describe('Cars', () => {
                     done();
                 }
             })
-    })});
+    })
+});

@@ -9,31 +9,33 @@ const moment = require('moment');
 const app = express();
 const port = process.env.PORT || 3000;
 
-//Set up database
+//Sätter upp databasen
 const mongoose = require('mongoose');
 const configDB = require('./config/database.js');
 let db;
 
 mongoose.connect(configDB.uri);
 
-//Set view engine
+//Sätter view engine
 app.set('view engine', 'ejs');
 
-//Load and configure middleware
+//Laddar och konfigurerar middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(session({ secret: 'jätte hemligt',
-                  resave: true,
-                  saveUninitialized: true }));
+app.use(session({
+    secret: 'jätte hemligt',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(express.static(__dirname + '/public'));
 app.use(flash());
 app.locals.moment = moment;
 
-//Loads controller
+//Laddar controller
 app.use(require('./controllers'));
 
 app.listen(port, function() {
-    console.log('Listening on port '+port+'...');
+    console.log('Listening on port ' + port + '...');
 });
 
 module.exports = app;
