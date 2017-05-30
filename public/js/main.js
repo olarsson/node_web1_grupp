@@ -33,10 +33,11 @@ var tableSort = {
     });
   },
   sortBy: function(e, elList) {
-    index = null;
+    let index = null;
     for (let i = 0; i < elList.length; i++) {
       if (elList[i] == e.target) {
-        index = i + 3; //there is 3 input elements first that we ignore
+        const ignore = $($('.divTableRow')[0]).find('input[type="hidden"]').length;
+        index = i + ignore; //hoppa över hidden input elementen i raderna
         break;
       };
     }
